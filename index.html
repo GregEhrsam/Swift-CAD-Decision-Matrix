@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift County: Path to a Modern Public Safety System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .flowchart-node {
+            border: 2px solid;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            font-weight: 600;
+            min-width: 160px;
+        }
+        .flowchart-line {
+            height: 2px;
+            width: 100%;
+        }
+        .flowchart-line-vertical {
+            width: 2px;
+            height: 40px;
+            margin: 0 auto;
+        }
+        .option-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .option-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        .recommended-glow {
+            box-shadow: 0 0 25px 5px rgba(59, 130, 246, 0.7);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center my-8 md:my-12">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-[#003f5c]">Charting the Safest Path Forward</h1>
+            <p class="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">Swift County faces a critical decision as its legacy public safety system retires. This analysis visualizes the three potential paths to modernization, focusing on risk, cost, and value to the community.</p>
+        </header>
+
+        <main>
+            <section id="decision-matrix" class="mb-16">
+                <h2 class="text-3xl font-bold text-center text-[#2f4b7c] mb-10">Evaluating the Three Paths Forward</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                    <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col">
+                        <h3 class="text-2xl font-bold text-[#003f5c] mb-4 text-center">Path 1: Re-engage with Motorola</h3>
+                        <p class="text-gray-600 mb-6 text-center">A partnership that acknowledges the past and provides a guaranteed, low-risk path to a modern system.</p>
+                        <div class="chart-container mb-6" style="height: 200px; max-height: 200px;">
+                            <canvas id="riskChartMotorola"></canvas>
+                        </div>
+                        <div class="chart-container" style="height: 250px; max-height: 250px;">
+                            <canvas id="leverageChartMotorola"></canvas>
+                        </div>
+                         <div class="mt-6 text-center">
+                            <p class="text-lg font-semibold text-gray-700">Vendor Stability: <span class="text-green-600 font-bold">✅ High</span></p>
+                            <p class="text-sm text-gray-500">Long, stable history as a leader in mission-critical technology.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col">
+                        <h3 class="text-2xl font-bold text-[#665191] mb-4 text-center">Path 2: Upgrade with Incumbent</h3>
+                        <p class="text-gray-600 mb-6 text-center">The path of least resistance, but with uncertain costs and the risks of a platform built from corporate mergers.</p>
+                        <div class="chart-container mb-6" style="height: 200px; max-height: 200px;">
+                            <canvas id="riskChartIncumbent"></canvas>
+                        </div>
+                        <div class="chart-container" style="height: 250px; max-height: 250px;">
+                            <canvas id="leverageChartIncumbent"></canvas>
+                        </div>
+                        <div class="mt-6 text-center">
+                            <p class="text-lg font-semibold text-gray-700">Vendor Stability: <span class="text-yellow-600 font-bold">🟡 Medium</span></p>
+                            <p class="text-sm text-gray-500">A newer entity formed by merging four different software firms.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col">
+                        <h3 class="text-2xl font-bold text-[#d45087] mb-4 text-center">Path 3: Start New RFP Process</h3>
+                        <p class="text-gray-600 mb-6 text-center">A complete reset that discards all past work and introduces the highest levels of risk, cost, and delay.</p>
+                        <div class="chart-container mb-6" style="height: 200px; max-height: 200px;">
+                            <canvas id="riskChartRFP"></canvas>
+                        </div>
+                        <div class="chart-container" style="height: 250px; max-height: 250px;">
+                            <canvas id="leverageChartRFP"></canvas>
+                        </div>
+                         <div class="mt-6 text-center">
+                            <p class="text-lg font-semibold text-gray-700">Vendor Stability: <span class="text-red-600 font-bold">❓ Unknown</span></p>
+                            <p class="text-sm text-gray-500">The long-term viability of a new, unvetted vendor is a major unknown.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="financials" class="mb-16 bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-center text-[#2f4b7c] mb-4">A Fiscally Conservative Approach</h2>
+                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-10">Swift County prioritizes responsible spending. The recommended path must align with this core value by providing budget certainty and eliminating financial risk.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-xl font-bold text-[#003f5c] mb-2 text-center">Consistent Investment in Safety</h3>
+                        <p class="text-gray-600 mb-4 text-center">The county consistently allocates millions to public safety, demonstrating its importance. A new system is a necessary infrastructure investment, not a discretionary expense.</p>
+                        <div class="chart-container" style="height: 300px; max-height: 300px;">
+                            <canvas id="budgetChart"></canvas>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-[#003f5c] mb-4 text-center">Cost & Financial Risk Comparison</h3>
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-green-500 bg-green-50 p-4 rounded-r-lg">
+                                <h4 class="font-bold text-lg text-green-800">Path 1: Motorola</h4>
+                                <p class="text-gray-700"><span class="font-bold">Lowest Risk.</span> $0 cost for Year 1 service, starting only after Go-Live. Predictable $120k total for Years 2-5. No financial risk from delays.</p>
+                            </div>
+                            <div class="border-l-4 border-yellow-500 bg-yellow-50 p-4 rounded-r-lg">
+                                <h4 class="font-bold text-lg text-yellow-800">Path 2: Incumbent</h4>
+                                <p class="text-gray-700"><span class="font-bold">Uncertain Cost.</span> Lacks competitive leverage, positioning the vendor to dictate terms and pricing. Costs are unknown and unpredictable.</p>
+                            </div>
+                            <div class="border-l-4 border-red-500 bg-red-50 p-4 rounded-r-lg">
+                                <h4 class="font-bold text-lg text-red-800">Path 3: New RFP</h4>
+                                <p class="text-gray-700"><span class="font-bold">Highest Risk & Cost.</span> Involves significant staff time ("soft costs") and unknown, likely high, upfront capital investment.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="new-comparison" class="mb-16">
+                 <div class="max-w-7xl mx-auto">
+                    <header class="text-center mb-12">
+                        <h2 class="text-4xl sm:text-5xl font-extrabold text-gray-800 tracking-tight">A Clear Choice for Your CAD/RMS/JMS Solution</h2>
+                    </header>
+            
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="option-card bg-white rounded-2xl p-8 border-2 border-gray-200 flex flex-col">
+                            <div class="flex-grow">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="text-2xl font-bold text-gray-700">Option 1: The Original Proposal</h3>
+                                    <span class="bg-gray-200 text-gray-700 text-xs font-semibold px-3 py-1 rounded-full">2022 Baseline</span>
+                                </div>
+                                <p class="text-gray-600 mb-6">A 5-year turnkey service plan, heavily discounted as an early adopter.</p>
+                                
+                                <ul class="space-y-4 text-gray-700 mb-8">
+                                    <li class="flex items-start">
+                                        <svg class="w-6 h-6 text-red-500 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 10v-2m0-4h.01M4.93 4.93l.707.707M18.364 18.364l.707.707M4.93 19.071l.707-.707M18.364 5.636l.707-.707"></path></svg>
+                                        <div>
+                                            <h4 class="font-semibold">Initial Flex Cost</h4>
+                                            <p class="text-sm text-gray-500">$700,000</p>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg class="w-6 h-6 text-green-500 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                        <div>
+                                            <h4 class="font-semibold">Early Adopter Discount</h4>
+                                            <p class="text-sm text-gray-500">-$150,000</p>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg class="w-6 h-6 text-red-500 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                        <div>
+                                            <h4 class="font-semibold">Estimated Swift Labor/OT</h4>
+                                            <p class="text-sm text-gray-500">$200,000</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="mt-auto pt-6 border-t border-gray-200">
+                                <p class="text-lg font-semibold text-gray-700">Total All-In Cost</p>
+                                <p class="text-4xl font-extrabold text-red-600">$750,000</p>
+                            </div>
+                        </div>
+            
+                        <div class="option-card bg-blue-600 text-white rounded-2xl p-8 border-4 border-blue-700 recommended-glow flex flex-col">
+                             <div class="flex-grow">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="text-2xl font-bold">Re-engage with Motorola</h3>
+                                    <span class="bg-white text-blue-600 text-xs font-semibold px-3 py-1 rounded-full">RECOMMENDED</span>
+                                </div>
+                                <p class="opacity-90 mb-6">Leverage work already completed and finish the project with minimal additional investment.</p>
+                                
+                                <div class="mb-4">
+                                    <p class="font-semibold text-lg mb-2">Project is 75-90% Complete!</p>
+                                    <div class="w-full bg-blue-400 rounded-full h-4">
+                                        <div class="bg-white rounded-full h-4" style="width: 80%"></div>
+                                    </div>
+                                </div>
+            
+                                <ul class="space-y-4 opacity-90 mb-8">
+                                    <li class="flex items-start">
+                                         <svg class="w-6 h-6 text-white mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                        <div>
+                                            <h4 class="font-semibold">Sunk Costs (Already Paid/Expended)</h4>
+                                            <p class="text-sm opacity-80">$140k (to MSI) + $140k (Labor/OT)</p>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg class="w-6 h-6 text-white mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c1.104 0 2 .896 2 2s-.896 2-2 2-2-.896-2-2 .896-2 2 2z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2a10 10 0 100 20 10 10 0 000-20z"></path></svg>
+                                        <div>
+                                            <h4 class="font-semibold">New Motorola Ask (Yrs 3-5)</h4>
+                                            <p class="text-sm opacity-80">$120,000</p>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg class="w-6 h-6 text-white mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                        <div>
+                                            <h4 class="font-semibold">Reduced Remaining Swift Labor</h4>
+                                            <p class="text-sm opacity-80">$50,000 (25% of original estimate)</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="mt-auto pt-6 border-t border-blue-400">
+                                <p class="text-lg font-semibold">Total All-In Cost</p>
+                                <p class="text-4xl font-extrabold text-white">$310,000</p>
+                            </div>
+                        </div>
+            
+                        <div class="option-card bg-white rounded-2xl p-8 border-2 border-gray-200 flex flex-col">
+                            <div class="flex-grow">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="text-2xl font-bold text-gray-700">Option 3: Start Over</h3>
+                                     <span class="bg-yellow-200 text-yellow-800 text-xs font-semibold px-3 py-1 rounded-full">High Risk</span>
+                                </div>
+                                <p class="text-gray-600 mb-6">Engage a new vendor, restart the entire process, and face significant new costs and potential delays.</p>
+                                
+                                 <ul class="space-y-4 text-gray-700 mb-8">
+                                    <li class="flex items-start">
+                                        <svg class="w-6 h-6 text-red-500 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.546-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                        <div>
+                                            <h4 class="font-semibold">New Vendor Cost Estimate</h4>
+                                            <p class="text-sm text-gray-500">$500,000 - $1,000,000</p>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg class="w-6 h-6 text-red-500 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                        <div>
+                                            <h4 class="font-semibold">Estimated Swift Labor/OT</h4>
+                                            <p class="text-sm text-gray-500">$200,000 (Full project restart)</p>
+                                        </div>
+                                    </li>
+                                     <li class="flex items-start">
+                                        <svg class="w-6 h-6 text-yellow-500 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                        <div>
+                                            <h4 class="font-semibold">Known Industry Challenges</h4>
+                                            <p class="text-sm text-gray-500">Other vendors have also faced implementation difficulties.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="mt-auto pt-6 border-t border-gray-200">
+                                <p class="text-lg font-semibold text-gray-700">Total All-In Cost</p>
+                                <p class="text-4xl font-extrabold text-red-600">$700K - $1.2M</p>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        const wrapLabel = (label, maxLength = 16) => {
+            if (label.length <= maxLength) {
+                return label;
+            }
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + ' ' + word).trim().length > maxLength) {
+                    lines.push(currentLine.trim());
+                    currentLine = word;
+                } else {
+                    currentLine = (currentLine + ' ' + word).trim();
+                }
+            }
+            if (currentLine) {
+                lines.push(currentLine.trim());
+            }
+            return lines;
+        };
+        
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+        
+        const defaultChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        color: '#4b5563',
+                        font: {
+                            size: 14,
+                        }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { color: '#4b5563' },
+                    grid: { color: '#e5e7eb' }
+                },
+                x: {
+                    ticks: { color: '#4b5563' },
+                    grid: { display: false }
+                }
+            }
+        };
+
+        const riskData = {
+            motorola: {
+                labels: ['Implementation Risk', 'Financial Risk'],
+                datasets: [{
+                    label: 'Risk Level',
+                    data: [1, 1],
+                    backgroundColor: ['#22c55e'],
+                    borderColor: ['#16a34a'],
+                    borderWidth: 1,
+                    barPercentage: 0.5,
+                }]
+            },
+            incumbent: {
+                labels: ['Implementation Risk', 'Financial Risk'],
+                datasets: [{
+                    label: 'Risk Level',
+                    data: [2, 2],
+                    backgroundColor: ['#f59e0b'],
+                    borderColor: ['#d97706'],
+                    borderWidth: 1,
+                    barPercentage: 0.5,
+                }]
+            },
+            rfp: {
+                labels: ['Implementation Risk', 'Financial Risk'],
+                datasets: [{
+                    label: 'Risk Level',
+                    data: [3, 3],
+                    backgroundColor: ['#ef4444'],
+                    borderColor: ['#dc2626'],
+                    borderWidth: 1,
+                    barPercentage: 0.5,
+                }]
+            }
+        };
+
+        const riskOptions = {
+            ...defaultChartOptions,
+            indexAxis: 'y',
+            scales: {
+                x: {
+                    max: 3,
+                    ticks: {
+                        stepSize: 1,
+                        callback: function(value) {
+                            if (value === 1) return 'Low';
+                            if (value === 2) return 'Medium';
+                            if (value === 3) return 'High';
+                            return '';
+                        },
+                        color: '#4b5563'
+                    },
+                     grid: { color: '#e5e7eb' }
+                },
+                y: {
+                    ticks: { color: '#4b5563' },
+                    grid: { display: false }
+                }
+            },
+            plugins: {
+                legend: { display: false },
+                tooltip: { enabled: false }
+            }
+        };
+
+        new Chart(document.getElementById('riskChartMotorola'), { type: 'bar', data: riskData.motorola, options: riskOptions });
+        new Chart(document.getElementById('riskChartIncumbent'), { type: 'bar', data: riskData.incumbent, options: riskOptions });
+        new Chart(document.getElementById('riskChartRFP'), { type: 'bar', data: riskData.rfp, options: riskOptions });
+
+        const leverageData = {
+            motorola: {
+                labels: ['Work Leveraged', 'Work Lost'],
+                datasets: [{
+                    data: [95, 5],
+                    backgroundColor: ['#2f4b7c', '#e5e7eb'],
+                    hoverOffset: 4
+                }]
+            },
+            incumbent: {
+                labels: ['Work Leveraged', 'Work Lost'],
+                datasets: [{
+                    data: [15, 85],
+                    backgroundColor: ['#665191', '#e5e7eb'],
+                    hoverOffset: 4
+                }]
+            },
+            rfp: {
+                labels: ['Work Leveraged', 'Work Lost'],
+                datasets: [{
+                    data: [0, 100],
+                    backgroundColor: ['#d45087', '#e5e7eb'],
+                    hoverOffset: 4
+                }]
+            }
+        };
+
+        const leverageOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: { color: '#4b5563', font: { size: 14 } }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback,
+                        label: function(context) {
+                            return `${context.label}: ${context.parsed}%`;
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Leveraging Past Work & Investment',
+                    color: '#1f2937',
+                    font: { size: 16, weight: 'bold' }
+                }
+            }
+        };
+
+        new Chart(document.getElementById('leverageChartMotorola'), { type: 'doughnut', data: leverageData.motorola, options: leverageOptions });
+        new Chart(document.getElementById('leverageChartIncumbent'), { type: 'doughnut', data: leverageData.incumbent, options: leverageOptions });
+        new Chart(document.getElementById('leverageChartRFP'), { type: 'doughnut', data: leverageData.rfp, options: leverageOptions });
+        
+        const budgetData = {
+            labels: ['2022 (Actual)', '2023 (Budget)', '2024 (Budget)', '2025 (Budget)'],
+            datasets: [{
+                label: 'Public Safety Budget ($)',
+                data: [3469301, 3596798, 4144566, 4043652],
+                fill: true,
+                backgroundColor: 'rgba(47, 75, 124, 0.2)',
+                borderColor: '#2f4b7c',
+                tension: 0.1,
+                pointBackgroundColor: '#2f4b7c',
+                pointRadius: 5
+            }]
+        };
+
+        new Chart(document.getElementById('budgetChart'), {
+            type: 'line',
+            data: budgetData,
+            options: {
+                ...defaultChartOptions,
+                scales: {
+                     y: {
+                        beginAtZero: false,
+                        ticks: {
+                            color: '#4b5563',
+                            callback: function(value) {
+                                return '$' + (value / 1000000).toFixed(2) + 'M';
+                            }
+                        },
+                        grid: { color: '#e5e7eb' }
+                    },
+                    x: {
+                        ticks: { color: '#4b5563' },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
